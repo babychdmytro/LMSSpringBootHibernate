@@ -23,6 +23,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="authorId", scope=Author.class)
 public class Author implements Serializable {
 
+	
+	//New changes
 	private static final long serialVersionUID = 2323860177160839664L;
 
 	@Id
