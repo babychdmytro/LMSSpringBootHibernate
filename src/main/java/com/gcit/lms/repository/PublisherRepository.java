@@ -9,4 +9,6 @@ import com.gcit.lms.entity.Publisher;
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, Integer> {
 
+	Publisher findByPublisherId(Integer publisherId);
+	
 }

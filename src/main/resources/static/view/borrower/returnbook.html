@@ -1,0 +1,28 @@
+<div class="container" ng-controller="borrowerController">
+	
+	<table class="table">
+	  <thead class="thead-light">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Book Title</th>
+	      <th scope="col">Book Authors</th>
+	      <th scope="col">Book Genres</th>
+	      <th scope="col">Branch</th>
+	      <th scope="col">Due date</th>
+	      <th scope="col">Return</th>
+	    </tr>
+	  </thead>
+	  <tbody ng-repeat="b in bookloans">
+	    <tr>
+			<td>{{$index+1}}</td>
+			<td>{{b.book.title}}</td>
+			<td><span ng-repeat="a in b.book.authors">- {{a.authorName}}<br></span></td>
+			<td><span ng-repeat="g in b.book.genres">- {{g.genre_name}}<br></span></td>
+			<td><span>{{b.branch.branchName}}, {{b.branch.branchAddress}}<br></span></td>
+			<td><span ui-date ui-date-format="mm/dd/yyyy">{{b.dueDate | date:'yyyy-MM-dd HH:mm:ss'}}<br></span></td>
+			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" ng-click="returnBook(b)">Return</button></td>
+	    </tr>
+	  </tbody>
+	</table>
+	
+</div>

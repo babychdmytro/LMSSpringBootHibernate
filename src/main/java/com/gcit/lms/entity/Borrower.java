@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name="tbl_borrower")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="cardNo", scope=Borrower.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="cardNo", scope=Borrower.class)
 public class Borrower implements Serializable {
 
 	/**
@@ -36,7 +36,7 @@ public class Borrower implements Serializable {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="cardNo", unique = true, nullable = false)
 	private Integer cardNo;
 	

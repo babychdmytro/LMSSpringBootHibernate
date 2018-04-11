@@ -1,0 +1,45 @@
+<div class="container" ng-controller="authorController">
+<h3>List of Genres in LMS</h3>
+<!-- <input type="text" ng-model="searchAuthorString" ng-change="searchAuthors()"> -->
+	<table class="table">
+	  <thead class="thead-light">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Genre Name</th>
+	      <th scope="col">Edit</th>
+	      <th scope="col">Delete</th>
+	    </tr>
+	  </thead>  
+	  <tbody ng-repeat="g in genres">
+	  
+		<tr>
+			<td>{{$index+1}}</td>
+			<td>{{g.genre_name}}</td>
+			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" ng-click="openGenreModal(g.genre_id)">Edit</button></td>
+			<td><button type="button" class="btn btn-danger" ng-click="deleteGenre(g.genre_id)">Delete</button></td>
+		</tr>
+	  </tbody>
+	</table>
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" modal="editAuthor">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Enter Genre details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<span>Genre name: </span>
+        <input type="text" ng-model="genre.genre_name" value="genre.genre_name">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveGenre()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

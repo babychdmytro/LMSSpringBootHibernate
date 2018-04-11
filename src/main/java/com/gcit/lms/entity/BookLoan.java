@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,12 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -29,7 +33,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name="tbl_book_loans")
-@JsonIdentityInfo(generator=ObjectIdGenerators.None.class, scope=BookLoan.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.None.class, scope=BookLoan.class)
 public class BookLoan implements Serializable {
 
 	/**
@@ -37,12 +41,14 @@ public class BookLoan implements Serializable {
 	 */
 	private static final long serialVersionUID = -8843193530527117359L;
 	
-	@Column(name="bookId", nullable = false)
-	private Integer bookId;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="bookId")
+	private Book book;
 
-	@Column(name="branchId", nullable = false)
-	private Integer branchId;
-	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"books", "borrowers"})
+	@JoinColumn(name="branchId")
+	private Branch branch;
 	
 	@Column(name="cardNo", nullable = false)
 	private Integer cardNo;
@@ -57,23 +63,19 @@ public class BookLoan implements Serializable {
 	@Column(name="dateIn")
 	private Date dateIn;
 	
-//	@OneTo(fetch=FetchType.LAZY)
-//	@JoinColumn(name = "tbl_book", nullable = false)
-//	private Book book;
-	
-	
-	
-	public Integer getBookId() {
-		return bookId;
+
+
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
 	}
-	public void setBookId(Integer bookId) {
-		this.bookId = bookId;
-	}
-	public Integer getBranchId() {
-		return branchId;
-	}
-	public void setBranchId(Integer branchId) {
-		this.branchId = branchId;
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 	public Integer getCardNo() {
 		return cardNo;
@@ -99,69 +101,14 @@ public class BookLoan implements Serializable {
 	public void setDateIn(Date dateIn) {
 		this.dateIn = dateIn;
 	}
-	
-//	public Book getBook() {
-//		return book;
-//	}
-//	public void setBook(Book book) {
-//		this.book = book;
-//	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
-		result = prime * result + ((branchId == null) ? 0 : branchId.hashCode());
-		result = prime * result + ((cardNo == null) ? 0 : cardNo.hashCode());
-		result = prime * result + ((dateIn == null) ? 0 : dateIn.hashCode());
-		result = prime * result + ((dateOut == null) ? 0 : dateOut.hashCode());
-		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-		return result;
+//	
+	public Book getBook() {
+		return book;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BookLoan other = (BookLoan) obj;
-		if (bookId == null) {
-			if (other.bookId != null)
-				return false;
-		} else if (!bookId.equals(other.bookId))
-			return false;
-		if (branchId == null) {
-			if (other.branchId != null)
-				return false;
-		} else if (!branchId.equals(other.branchId))
-			return false;
-		if (cardNo == null) {
-			if (other.cardNo != null)
-				return false;
-		} else if (!cardNo.equals(other.cardNo))
-			return false;
-		if (dateIn == null) {
-			if (other.dateIn != null)
-				return false;
-		} else if (!dateIn.equals(other.dateIn))
-			return false;
-		if (dateOut == null) {
-			if (other.dateOut != null)
-				return false;
-		} else if (!dateOut.equals(other.dateOut))
-			return false;
-		if (dueDate == null) {
-			if (other.dueDate != null)
-				return false;
-		} else if (!dueDate.equals(other.dueDate))
-			return false;
-		return true;
+	public void setBook(Book book) {
+		this.book = book;
 	}
-	
-	
-	
+		
 	
 	
 }

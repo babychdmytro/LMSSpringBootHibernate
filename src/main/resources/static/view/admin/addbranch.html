@@ -1,0 +1,13 @@
+<div class="container" ng-controller="adminController">
+	<form>
+	  <div class="form-group">
+	    <label>Enter Branch Name</label>
+	    <input class="form-control" ng-model="branch.branchName" >
+	  </div>
+  	  <div class="form-group">
+	    <label>Enter Branch Address</label>
+	    <input class="form-control" ng-model="branch.branchAddress" >
+	  </div>
+	  <button type="button" class="btn btn-primary" ng-click="saveBranch()">Save Branch</button>
+	</form>
+</div>

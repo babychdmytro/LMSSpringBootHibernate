@@ -1,0 +1,57 @@
+<div class="container" ng-controller="adminController">
+<h3>List of Publishers in LMS</h3>
+<!-- <input type="text" ng-model="searchAuthorString" ng-change="searchAuthors()"> -->
+	<table class="table">
+	  <thead class="thead-light">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Address</th>
+   	      <th scope="col">Phone</th>
+	      <th scope="col">Edit</th>
+	      <th scope="col">Delete</th>
+	    </tr>
+	  </thead>  
+	  <tbody ng-repeat="p in publishers">
+	  
+		<tr>
+			<td>{{$index+1}}</td>
+			<td>{{p.publisherName}}</td>
+			<td>{{p.publisherAddress}}</td>
+			<td>{{p.publisherPhone}}</td>
+			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" ng-click="openPublisherModal(p.publisherId)">Edit</button></td>
+			<td><button type="button" class="btn btn-danger" ng-click="deletePublisher(p.publisherId)">Delete</button></td>
+		</tr>
+	  </tbody>
+	</table>
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" modal="editAuthor">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Enter Publisher details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<span>Name: </span>
+        <input type="text" ng-model="publisher.publisherName" value="publisher.publisherName">
+        <br>
+        <br>
+		<span>Address: </span>
+        <input type="text" ng-model="publisher.publisherAddress" value="publisher.publisherAddress">
+        <br>
+        <br>
+       	<span>Phone: </span>
+        <input type="text" ng-model="publisher.publisherPhone" value="publisher.publisherPhone">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="savePublisher()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container" ng-controller="bookController">
+	<form>
+		<div class="form-group">
+			<label for="title">Enter Book Name</label> 
+			<input class="form-control" ng-model="book.title" placeholder="Book name">
+			<br> 
+			<label>Choose Authors from list</label> 
+			<select multiple class="form-control" id="sel1" ng-model="chosenAuthors.authorId" >
+		        <option ng-repeat="a in authors" ng-value="a.authorId">{{a.authorName}}</option>
+	        </select>
+	        <br> 
+			<label>Choose Publisher from list</label> 
+			<select class="form-control" id="sel1" ng-model="publisher.publisherId" >
+		        <option ng-repeat="p in publishers" ng-value="p.publisherId">{{p.publisherName}}</option>
+	        </select>
+	        <br>
+   			<label>Choose Genres from list</label> 
+			<select multiple class="form-control" id="sel1" ng-model="chosenGenres.genre_id" >
+		        <option ng-repeat="g in genres" ng-value="g.genre_id">{{g.genre_name}}</option>
+	        </select>
+		</div>
+		<button type="button" class="btn btn-primary" ng-click="saveBook()">Save Book</button>
+	</form>
+</div>

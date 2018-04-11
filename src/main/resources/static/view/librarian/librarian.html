@@ -1,0 +1,68 @@
+<div class="container" ng-controller="branchController">
+	<h2>Hello Librarian! Choose your branch</h2>
+    
+	<select class="form-control" id="sel1" ng-model="branch.branchId" ng-change="processBranch()">
+       <option ng-repeat="b in branches" ng-value="b.branchId">{{b.branchName}}</option>
+     </select>
+     
+     <div ng-if="branch.branchId">
+	    <br>
+	    <br>
+	    <h4>You selected <b>{{branch.branchName}}</b> branch at <b>{{branch.branchAddress}}</b></h4>
+	    <div id="accordion">
+		  <div class="card">
+	    <div class="card-header" id="headingTwo">
+	      <h5 class="mb-0">
+	        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+	          Click here to edit branch information
+	        </button>
+	      </h5>
+	    </div>
+	    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+	      <div class="card-body">
+        	<form>
+			  <div class="form-group">
+			    <label>Enter new branch name</label><input class="form-control" ng-model="branch.branchName" placeholder="Branch Name" col-3>
+			    <label>Enter new branch address</label><input class="form-control" ng-model="branch.branchAddress" placeholder="Branch Address">
+			  </div>
+			  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTwo" ng-click="saveBranch()" >Save Branch</button>
+			</form>
+	      </div>
+	    </div>
+	  </div>
+	  
+	  
+	  <div class="card">
+	    <div class="card-header" id="headingOne">
+	      <h5 class="mb-0">
+	        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+	          Click here to add or update a number of books in your branch
+	        </button>
+	      </h5>
+	    </div>
+	    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+	      <div class="card-body">
+	      <label>Choose a book from the list</label>
+   			<select class="form-control" id="sel1" ng-model="book.bookId" ng-change="getBookCopies()">
+		        <option ng-repeat="b in books | orderBy : 'title'" ng-value="b.bookId">{{b.title}}</option>
+	        </select>
+	      <br>
+	      <br>
+	      <div ng-if="bookcopies.bookId">
+	      		<form>
+				  <label>You have {{noOfCopies}} copies. Please enter a new number of copies</label>
+				  <div class="input-group col-3">
+					  <input type="text" class="form-control" placeholder="Enter new number of copies" aria-label="Recipient's username" 
+					   aria-describedby="basic-addon2" value="" ng-model="bookcopies.noOfCopies">
+					  <div class="input-group-append">
+					    <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseOne" ng-click="saveBookCopies()">Save</button>
+					  </div>
+					</div>
+				</form>
+	      </div>
+	      </div>
+	    </div>
+	  </div>
+ 	 </div>
+  	</div>
+</div>

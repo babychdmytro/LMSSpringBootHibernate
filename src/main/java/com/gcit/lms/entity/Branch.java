@@ -16,9 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -28,7 +30,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="tbl_library_branch")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="branchId", scope=Branch.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="branchId", scope=Branch.class)
 public class Branch implements Serializable {
 	/**
 	 * 
@@ -36,7 +38,8 @@ public class Branch implements Serializable {
 	private static final long serialVersionUID = -3885644549212691543L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@PrimaryKeyJoinColumn
 	@Column(name="branchId", unique = true, nullable = false)
 	private Integer branchId;
 	
@@ -47,11 +50,12 @@ public class Branch implements Serializable {
 	private String branchAddress;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="tbl_book_loans", catalog="library", joinColumns = {@JoinColumn(name="branchId", nullable=false)}, 
+	@JoinTable(name="tbl_book_copies", catalog="library", joinColumns = {@JoinColumn(name="branchId", nullable=false)}, 
 	inverseJoinColumns={@JoinColumn(name="bookId")})
 	private List <Book> books;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
+	@JsonIgnoreProperties({"books", "branches"})
 	@JoinTable(name="tbl_book_loans", catalog="library", joinColumns = {@JoinColumn(name="branchId", nullable=false)}, 
 	inverseJoinColumns={@JoinColumn(name="cardNo")})
 	private List <Borrower> borrowers;

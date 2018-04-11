@@ -1,0 +1,33 @@
+<div class="container" ng-controller="borrowerController">
+	<h4>Pick the Branch you want to check out from</h4>
+	
+	<select class="form-control" id="sel1" ng-model="branch.branchId">
+       <option ng-repeat="b in branches" ng-value="b.branchId">{{b.branchName}}</option>
+     </select>
+	<br>
+	<br>
+	 <div ng-if="branch.branchId">
+			<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Book Title</th>
+			      <th scope="col">Book Author</th>
+			      <th scope="col">Genres</th>
+			      <th scope="col">Checkout</th>
+			    </tr>
+			  </thead>
+			  <tbody ng-repeat="b in branches[branch.branchId-1].books">
+			    <tr>
+					<td>{{$index+1}}</td>
+					<td>{{b.title}}</td>
+					<td><span ng-repeat="a in b.authors">- {{a.authorName}}<br></span></td>
+					<td><span ng-repeat="g in b.genres">- {{g.genre_name}}<br></span></td>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" ng-click="checkoutBook(b.bookId)">Checkout</button></td>
+			    </tr>
+			  </tbody>
+			</table>
+	 	
+	 </div>
+	
+</div>

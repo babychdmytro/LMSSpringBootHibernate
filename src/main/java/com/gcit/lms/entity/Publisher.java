@@ -4,6 +4,7 @@
 package com.gcit.lms.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -26,7 +29,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name="tbl_publisher")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="publisherId", scope=Publisher.class)
 public class Publisher implements Serializable {
 	
 	/**
@@ -35,22 +37,22 @@ public class Publisher implements Serializable {
 	private static final long serialVersionUID = 6154042387284730265L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="publisherId", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@PrimaryKeyJoinColumn
+	@Column(name="publisherId")
 	private Integer publisherId;
 	
-	@Column(name="publisherName", nullable = false)
+	@Column(name="publisherName")
 	private String publisherName;
 	
-	@Column(name="publisherPhone", nullable = false)
+	@Column(name="publisherPhone")
 	private String publisherPhone;
 	
-	@Column(name="publisherAddress", nullable = false)
+	@Column(name="publisherAddress")
 	private String publisherAddress;
 	
-	@OneToMany
-	@JoinColumn(name = "pubId")
-	private List<Book> books;
+	
+
 	/**
 	 * @return the publisherId
 	 */
@@ -98,18 +100,6 @@ public class Publisher implements Serializable {
 	 */
 	public void setPublisherAddress(String publisherAddress) {
 		this.publisherAddress = publisherAddress;
-	}
-	/**
-	 * @return the books
-	 */
-	public List<Book> getBooks() {
-		return books;
-	}
-	/**
-	 * @param books the books to set
-	 */
-	public void setBooks(List<Book> books) {
-		this.books = books;
 	}
 
 }

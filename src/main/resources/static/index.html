@@ -1,6 +1,19 @@
-<!DOCTYPE html>
-<!-- saved from url=(0053)https://getbootstrap.com/docs/4.0/examples/jumbotron/ -->
-<html lang="en" class="gr__getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-require="angular.js@*" data-semver="1.4.1" src="http://code.angularjs.org/1.4.1/angular.js"></script>
+<script data-require="angular.js@*" data-semver="1.4.1" src="http://code.angularjs.org/1.4.1/angular-route.js"></script>
+<script data-require="angular.js@*" data-semver="1.4.1" src="http://code.angularjs.org/1.4.1/angular-cookies.js"></script>
+
+
+<script src="./js/app.js"></script>
+<script src="./js/routes/admin-routes.js"></script>
+<script src="./js/routes/librarian-routes.js"></script>
+<script src="./js/routes/borrower-routes.js"></script>
+<script src="./js/controllers/book-controllers.js"></script>
+<script src="./js/controllers/author-controllers.js"></script>
+<script src="./js/controllers/branch-controllers.js"></script>
+<script src="./js/controllers/borrower-controllers.js"></script>
+<script src="./js/controllers/admin-controllers.js"></script>
+<script src="./js/factory/admin-factory.js"></script>
+<html lang="en" ng-app="lmsApp" class="gr__getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -562,7 +575,7 @@
   <body data-gr-c-s-loaded="true">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">LMS</a>
+      <a class="navbar-brand" href="#/home">LMS</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -570,20 +583,14 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link" href="#/home">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <a class="nav-link dropdown-toggle" href="http://example.com/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#/admin">Administrator</a>
+              <a class="dropdown-item" href="#/librarian/librarian">Librarian</a>
+              <a class="dropdown-item" href="#/borrower/borrower">Borrower</a>
             </div>
           </li>
         </ul>
@@ -593,14 +600,21 @@
         </form> -->        
       </div>
     </nav>
-
+	<br>
+	<br>
+	<br>
     <main role="main">
 
+        <section data-ng-view="" id="content" class="animate-fade-up"></section>
 
     </main>
 
-    <footer class="container">
-      <p>LMS Inc.</p>
+	<br>
+	<br>
+	<br>
+	<hr>
+    <footer class="container" style="align-content: center;">
+      <p>GCIT Inc. 2018</p>
     </footer>
 
     <!-- Bootstrap core JavaScript

@@ -1,0 +1,53 @@
+<div class="container" ng-controller="adminController">
+	
+	<table class="table">
+	  <thead class="thead-light">
+	    <tr>
+	      <th scope="col">Borrower CardNo</th>
+	      <th scope="col">Book Title</th>
+	      <th scope="col">Branch</th>
+	      <th scope="col">Due date</th>
+	      <th scope="col">Return</th>
+	    </tr>
+	  </thead>
+	  <tbody ng-repeat="b in bookloans">
+	    <tr>
+			<td>{{b.cardNo}}</td>
+			<td>{{b.book.title}}</td>
+			<td><span>{{b.branch.branchName}}, {{b.branch.branchAddress}}<br></span></td>
+			<td><span ui-date ui-date-format="mm/dd/yyyy">{{b.dueDate | date:'yyyy-MM-dd HH:mm:ss'}}<br></span></td>
+			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" ng-click="openBookLoanModal(b)">Change Date</button></td>
+	    </tr>
+	  </tbody>
+	</table>
+
+ 
+  
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" modal="editAuthor">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Change Due Date for</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<label>Borrower CardNo: {{bookloan.cardNo}}</label><br>
+      	<label>Branch: {{bookloan.branch.branchName}}, {{bookloan.branch.branchAddress}}</label><br>
+      	<label>Book Title: {{bookloan.book.title}}</label><br>
+      	<label>Due Date: {{bookloan.dueDate | date:'yyyy-MM-dd HH:mm:ss'}}</label>
+      	<div class="form-group">
+      	<hr>
+ 	<label>Pick new due date</label><br><input type="date" name="bday" ng-model="bookloan.dueDate">
+	</div>
+      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveDueDate()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

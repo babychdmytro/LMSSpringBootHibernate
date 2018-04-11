@@ -1,0 +1,51 @@
+<div class="container" ng-controller="adminController">
+<h3>List of Branches in LMS</h3>
+<!-- <input type="text" ng-model="searchAuthorString" ng-change="searchAuthors()"> -->
+	<table class="table">
+	  <thead class="thead-light">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Address</th>
+	      <th scope="col">Edit</th>
+	      <th scope="col">Delete</th>
+	    </tr>
+	  </thead>  
+	  <tbody ng-repeat="b in branches">
+	  
+		<tr>
+			<td>{{$index+1}}</td>
+			<td>{{b.branchName}}</td>
+			<td>{{b.branchAddress}}</td>
+			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" ng-click="openBranchModal(b.branchId)">Edit</button></td>
+			<td><button type="button" class="btn btn-danger" ng-click="deleteBranch(b.branchId)">Delete</button></td>
+		</tr>
+	  </tbody>
+	</table>
+	
+	<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" modal="editAuthor">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Enter Branch details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<span>Name: </span>
+        <input type="text" ng-model="branch.branchName" value="branch.branchName">
+        <br>
+        <br>
+		<span>Address: </span>
+        <input type="text" ng-model="branch.branchAddress" value="branch.branchAddress">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveBranch()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

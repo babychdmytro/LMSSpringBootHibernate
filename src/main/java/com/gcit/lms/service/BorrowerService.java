@@ -51,10 +51,26 @@ public class BorrowerService extends BaseController {
 	BookCopiesRepository bookCopiesRepository;
 
 	
+	@RequestMapping(value="initBorrower", method=RequestMethod.GET, produces="application/json")
+	public Borrower initBorrower(){
+		return new Borrower();
+	}
+	
+	@RequestMapping(value="borrower/initBookLoan", method=RequestMethod.GET, produces="application/json")
+	public BookLoan initBookLoan(){
+		return new BookLoan();
+	}
+	
 	@RequestMapping(value = "borrower/readBorrowers", method = RequestMethod.GET, produces = "application/json")
 	public List<Borrower> readAllBorrowers() {
 		return borrowerRepository.findAll();
 	}
+	
+	@RequestMapping(value = "borrower/readBorrowerByCardNo/{cardNo}", method = RequestMethod.GET, produces = "application/json")
+	public Optional<Borrower> readBorrowerByCardNo(@PathVariable("cardNo") Integer cardNo) throws SQLException {
+		return borrowerRepository.findBorrowerByCardNo(cardNo);
+	}
+	
 
 	@RequestMapping(value = "borrower/readBranches", method = RequestMethod.GET, produces = "application/json")
 	public List<Branch> readBranches() throws SQLException {
@@ -70,16 +86,22 @@ public class BorrowerService extends BaseController {
 
 	@RequestMapping(value = "borrower/readBookLoans", method = RequestMethod.GET, produces = "application/json")
 	public List<BookLoan> readBookLoans() throws SQLException {
-
 		return bookLoansRepository.findAll();
-
+	}
+	
+	@RequestMapping(value = "borrower/readNotReturnedBookLoans", method = RequestMethod.GET, produces = "application/json")
+	public List<BookLoan> readNotReturnedBookLoans() throws SQLException {
+		return bookLoansRepository.findNotReturnedBookLoans();
 	}
 
 	@RequestMapping(value = "borrower/readBookLoansByCardNo/{cardNo}", method = RequestMethod.GET, produces = "application/json")
 	public List<BookLoan> readBookLoansByCardNo(@PathVariable("cardNo") Integer cardNo) throws SQLException {
-
 		return bookLoansRepository.findBookLoansByCardNo(cardNo);
-
+	}
+	
+	@RequestMapping(value = "borrower/readBorrowedBookLoansByCardNo/{cardNo}", method = RequestMethod.GET, produces = "application/json")
+	public List<BookLoan> readBorrowedBookLoansByCardNo(@PathVariable("cardNo") Integer cardNo) throws SQLException {
+		return bookLoansRepository.findBorrowedBookLoansByCardNo(cardNo);
 	}
 
 	@RequestMapping(value = "borrower/updateBookLoan", method = RequestMethod.POST, consumes = "application/json")

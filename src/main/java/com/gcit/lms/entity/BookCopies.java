@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="tbl_book_copies")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="bookCopiesId", scope=BookCopies.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="bookCopiesId", scope=BookCopies.class)
 public class BookCopies implements Serializable {
 
 	/**
@@ -32,11 +32,12 @@ public class BookCopies implements Serializable {
 	 */
 	private static final long serialVersionUID = 5715355931751063471L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="bookCopiesId", nullable = false)
-	private Integer bookCopiesId;
 	
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name="bookCopiesId", nullable = false)
+//	private Integer bookCopiesId;
+	
+	@Id
 	@Column(name="bookId", nullable = false)
 	private Integer bookId;
 	
@@ -48,13 +49,13 @@ public class BookCopies implements Serializable {
 
 	
 	
-	public Integer getBookCopiesId() {
-		return bookCopiesId;
-	}
-
-	public void setBookCopiesId(Integer bookCopiesId) {
-		this.bookCopiesId = bookCopiesId;
-	}
+//	public Integer getBookCopiesId() {
+//		return bookCopiesId;
+//	}
+//
+//	public void setBookCopiesId(Integer bookCopiesId) {
+//		this.bookCopiesId = bookCopiesId;
+//	}
 
 	public Integer getBookId() {
 		return bookId;

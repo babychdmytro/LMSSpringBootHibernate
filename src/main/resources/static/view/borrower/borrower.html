@@ -1,0 +1,30 @@
+<div class="container" ng-controller="borrowerController">
+	<h2>Enter your card number</h2>
+	<div class="input-group col-3">
+		<input type="text" class="form-control" placeholder="Enter card #" aria-describedby="basic-addon2" value="" ng-model="cardNoInput">
+	  <div class="input-group-append">
+	    <button class="btn btn-outline-primary" type="button" ng-click="verifyCardNo()">Login</button>
+	  </div>
+  </div>
+ 
+  <br>
+  <div ng-if="error">
+ 
+ 	<h6 style="color:red">Card number doesn't exist. Try again</h6>
+ 	
+  </div>
+  <br>
+
+  <div ng-if="access">
+  
+ 	<h4>Hello {{borrower.name}}! What would you like to do?</h4>
+ 	<br>
+	<div class="list-group col-6">
+	  <a href="#/borrower/checkoutbook" class="list-group-item list-group-item-action">Checkout book</a>
+	  <a href="#/borrower/returnbook" class="list-group-item list-group-item-action">Return book</a>
+	</div>
+ 	
+  </div>
+  
+	
+</div>
